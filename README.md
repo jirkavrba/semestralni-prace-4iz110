@@ -1,4 +1,4 @@
-# Seminární práce k předmětu 4IZ110 - Informační a komunikační technologie
+# Semestrální práce k předmětu 4IZ110 - Informační a komunikační technologie
 
 ## Programovací úlohy ze síťových technologií
 
