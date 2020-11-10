@@ -23,9 +23,12 @@
     <% unless @indexed.empty? %>
       <h5>Domény v indexu</h5>
       <% @indexed.each do |domain| %>
-        <div class="card-panel">
-          <code><%= domain.url %></code>
-        </div>
+        <a href="<%= domain_path(domain) %>">
+          <div class="card-panel hoverable">
+            <code class="black-text"><%= domain.url %></code><br>
+            <small class="grey-text">Naposledy indexováno <b><%= domain.last_indexed_at.to_s(:long) %></b></small>
+          </div>
+        </a>
       <% end%>
     <% end %>
   </div>

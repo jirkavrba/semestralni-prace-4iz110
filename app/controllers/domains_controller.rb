@@ -15,6 +15,11 @@ class DomainsController < ApplicationController
 
   def show
     @domain = Domain.find params[:id]
+  end
+
+  def start_indexing
+    @domain = Domain.find params[:id]
+    @domain.update last_indexed_at: DateTime.now
 
     IndexDomainJob.perform_later @domain.url
   end
