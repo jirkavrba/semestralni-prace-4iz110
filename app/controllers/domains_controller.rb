@@ -15,6 +15,8 @@ class DomainsController < ApplicationController
 
   def show
     @domain = Domain.find params[:id]
+
+    IndexDomainJob.perform_later @domain.url
   end
 
   private
