@@ -1,4 +1,32 @@
-<h1>Správa domén:</h1>
-<h2>Celkem <%= @domains.count %> domén v indexu</h2>
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <div class="col s12 m8">
+        <h5>Správa domén</h5>
+        <p class="grey-text">Celkem je v systému <%= @domains.count %> nastavených domén</p>
+      </div>
+      <div class="col s12 m4">
+        <%= link_to "Přidat doménu", new_domain_path, class: 'right btn green' %>
+      </div>
+    </div>
+    <% unless @not_indexed.empty? %>
+      <h5>Domény, které ještě nebyly indexované.</h5>
+      <% @not_indexed.each do |domain| %>
+        <a href="<%= domain_path(domain) %>">
+          <div class="card-panel hoverable">
+            <code class="red-text"><%= domain.url %></code>
+          </div>
+        </a>
+      <% end%>
+    <% end %>
 
-<!-- List domains or something, IDK I am a backend dev -->
+    <% unless @indexed.empty? %>
+      <h5>Domény v indexu</h5>
+      <% @indexed.each do |domain| %>
+        <div class="card-panel">
+          <code><%= domain.url %></code>
+        </div>
+      <% end%>
+    <% end %>
+  </div>
+</div>
