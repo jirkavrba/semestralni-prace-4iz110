@@ -19,9 +19,12 @@ class DomainsController < ApplicationController
 
   def start_indexing
     @domain = Domain.find params[:id]
-    @domain.update last_indexed_at: DateTime.now
+    @domain.update status: :enqueued,
+                   last_indexed_at: DateTime.now
 
-    IndexDomainJob.perform_later @domain.url
+    IndexDomainJob.perform_later @domain
+
+    redirect_to domains_path
   end
 
   private

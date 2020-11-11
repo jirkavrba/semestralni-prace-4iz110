@@ -22,7 +22,10 @@ module Indexing
       # Process the given url, this also adds it to the index
       process url, depth unless invalid
 
-    rescue StandardError
+    rescue Mechanize::UnsupportedSchemeError,
+           Mechanize::ResponseCodeError,
+           URI::BadURIError,
+           URI::InvalidURIError => e
       # TODO: Log errors
       # Ignored
     end
@@ -33,6 +36,9 @@ module Indexing
       @urls_indexed[url] = true
 
       page = agent.get(url)
+
+      # Do not handle images etc
+      return unless page.instance_of?(Mechanize::Page)
 
       # Do the actual indexing / analytics
       @callback.call(page)

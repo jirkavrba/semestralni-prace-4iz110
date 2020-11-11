@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_083836) do
 
   create_table "domains", force: :cascade do |t|
     t.string "url"
+    t.string "status", default: "not_indexed"
     t.datetime "last_indexed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

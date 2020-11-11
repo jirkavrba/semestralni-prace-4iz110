@@ -14,7 +14,15 @@
       <% @not_indexed.each do |domain| %>
         <a href="<%= domain_path(domain) %>">
           <div class="card-panel hoverable">
-            <code class="red-text"><%= domain.url %></code>
+            <code class="black-text"><%= domain.url %></code><br>
+            <% case domain.status %>
+            <% when 'enqueued' %>
+              <small class="grey-text">Čeká ve frontě na indexování</small>
+            <% when 'being_indexed' %>
+              <small class="blue-text">Probíhá indexování domény</small>
+            <% when 'error' %>
+              <small class="red-text">Při indexování došlo k chybě!</small>
+            <% end %>
           </div>
         </a>
       <% end%>
