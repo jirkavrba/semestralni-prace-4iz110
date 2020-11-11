@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-content">
+    <div class="card-title">Výsledky pro <b>&bdquo;<%= @query %>&rdquo;</b></div>
+    <p class="grey-text">Nalezeno <%= @results.count %> výsledků</p>
+
+    <div class="row">
+      <% @results.each do |result| %>
+        <div class="col s12">
+          <a href="<%= result.url %>" target="_blank">
+            <div class="card hoverable">
+              <div class="card-content">
+                <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= result.url %>">
+                <h6 class="black-text"><%= result.title %></h6>
+                <small><%= result.url %></small>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

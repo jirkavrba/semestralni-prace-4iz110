@@ -4,5 +4,7 @@ class SearchController < ApplicationController
   end
 
   def results
+    @query = params[:query]
+    @results = IndexedPage.search params[:query]
   end
 end

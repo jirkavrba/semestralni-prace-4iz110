@@ -28,7 +28,8 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'mechanize'
 
-gem 'sunspot_rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

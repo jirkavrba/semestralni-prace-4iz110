@@ -1,11 +1,13 @@
 module Indexing
   class Indexer
-    def index_page(url, page, domain_id)
+    def index_page(url, page, domain)
       # Ignore
+      domain.indexed_pages.create url: url,
+                                  title: page.title
     end
 
     def remove_domain(domain)
-      # Ignore
+      IndexedPage.where(domain_id: domain.id).delete_all
     end
   end
 end
