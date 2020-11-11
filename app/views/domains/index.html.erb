@@ -24,6 +24,9 @@
             <% when 'error' %>
               <small class="red-text">Při indexování došlo k chybě!</small>
             <% end %>
+
+            <br>
+            <small id="domain_<%= domain.id %>"></small>
           </div>
           <div class="card-action">
             <%= link_to 'Upravit', edit_domain_path(domain), class: 'black-text' %>
@@ -52,4 +55,12 @@
       <% end %>
     <% end %>
   </div>
+  <script>
+      $(document).on('turbolinks:load', function () {
+          if (window.location.href === "<%= domains_url %>") {
+              // Load the action cable connection
+              enableDomainStatusUpdatesChannel();
+          }
+      });
+  </script>
 </div>

@@ -7,11 +7,18 @@ class IndexDomainJob < ApplicationJob
     crawler = Indexing::Crawler.new domain.url
     crawler.run do |page|
       p page.title
+
+      ActionCable.server.broadcast 'crawler', id: domain.id,
+                                              title: page.title,
+                                              type: 'page_indexed'
     end
 
     domain.update status: :indexed
+    ActionCable.server.broadcast 'crawler', id: domain.id, type: 'finished'
   rescue StandardError => e
     # TODO: Better handling of invalid domains
+    p e
     domain.update status: :error
+    ActionCable.server.broadcast 'crawler', id: domain.id, type: 'finished'
   end
 end
