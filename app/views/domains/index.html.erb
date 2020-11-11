@@ -12,8 +12,8 @@
     <% unless @not_indexed.empty? %>
       <h5>Domény, které ještě nebyly indexované.</h5>
       <% @not_indexed.each do |domain| %>
-        <a href="<%= domain_path(domain) %>">
-          <div class="card-panel hoverable">
+        <div class="card">
+          <div class="card-content">
             <code class="black-text"><%= domain.url %></code><br>
             <% case domain.status %>
             <% when 'enqueued' %>
@@ -24,20 +24,30 @@
               <small class="red-text">Při indexování došlo k chybě!</small>
             <% end %>
           </div>
-        </a>
-      <% end%>
+          <div class="card-action">
+            <%= link_to 'Upravit', edit_domain_path(domain) %>
+            <% unless %w[being_indexed enqueued].include? domain.status %>
+              <%= link_to 'Indexovat', domain_path(domain) + '/index' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
 
     <% unless @indexed.empty? %>
       <h5>Domény v indexu</h5>
       <% @indexed.each do |domain| %>
-        <a href="<%= domain_path(domain) %>">
-          <div class="card-panel hoverable">
+        <div class="card">
+          <div class="card-content">
             <code class="black-text"><%= domain.url %></code><br>
             <small class="grey-text">Naposledy indexováno <b><%= domain.last_indexed_at.to_s(:long) %></b></small>
           </div>
-        </a>
-      <% end%>
+          <div class="card-action">
+            <%= link_to 'Upravit', edit_domain_path(domain) %>
+            <%= link_to 'Indexovat znovu', domain_path(domain) + '/index' %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
