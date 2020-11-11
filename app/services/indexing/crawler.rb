@@ -41,7 +41,7 @@ module Indexing
       return unless page.instance_of?(Mechanize::Page)
 
       # Do the actual indexing / analytics
-      @callback.call(page)
+      @callback.call(page, url)
 
       # Process all the links
       page.links.each do |link|

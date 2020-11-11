@@ -4,12 +4,15 @@ class IndexDomainJob < ApplicationJob
   def perform(domain)
     domain.update status: :being_indexed
 
+    indexer = Indexing::Indexer.new
+    indexer.remove_domain domain.url
+
     crawler = Indexing::Crawler.new domain.url
-    crawler.run do |page|
-      p page.title
+    crawler.run do |page, url|
+      indexer.index_page(url, page, domain.id)
 
       ActionCable.server.broadcast 'crawler', id: domain.id,
-                                              title: page.title,
+                                              title: url,
                                               type: 'page_indexed'
     end
 

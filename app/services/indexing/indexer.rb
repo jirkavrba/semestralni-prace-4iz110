@@ -1,7 +1,11 @@
 module Indexing
   class Indexer
-    def self.index_page(page, domain_id)
+    def index_page(url, page, domain_id)
+      # Ignore
+    end
 
+    def remove_domain(domain)
+      # Ignore
     end
   end
 end
