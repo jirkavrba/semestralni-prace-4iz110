@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'search#index'
+  get '/search', to: 'search#results'
 end

@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-content">
+    <div class="row">
+      <div class="col s12 m8">
+        <h5>
+          <a href="<%= domains_path %>" class="grey-text" style="margin-right: 1rem"><i class="material-icons md">arrow_back</i></a>
+          Upravit doménu <%= @domain.url %>
+        </h5>
+      </div>
+      <%= form_with url: domain_path(@domain), method: :patch do %>
+        <div class="col s12">
+          <div class="input-field">
+            <%= label_tag "URL adresa kořenového adresáře" %>
+            <%= text_field :domain, :url, autofocus: true, autocomplete: false %>
+            <span class="helper-text">Při uložení změn dojde k odstranění záznamů z indexu</span>
+          </div>
+        </div>
+        <div class="col s12">
+          <%= submit_tag "Uložit změny", class: 'btn-large blue-grey' %>
+          <%= link_to "Smazat tuto doménu", domain_path(@domain), method: :delete, class: 'btn-large red', data: { confirm: "Tato akce je nevratná." } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

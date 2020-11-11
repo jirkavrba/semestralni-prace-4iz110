@@ -9,7 +9,25 @@ class DomainsController < ApplicationController
   end
 
   def create
-    @domain = Domain.create create_params
+    @domain = Domain.create domain_params
+    redirect_to domains_path
+  end
+
+  def edit
+    @domain = Domain.find params[:id]
+  end
+
+  def update
+    @domain = Domain.find params[:id]
+    @domain.update domain_params.merge last_indexed_at: nil, status: :not_indexed
+
+    redirect_to domains_path
+  end
+
+  def destroy
+    @domain = Domain.find params[:id]
+    @domain.delete
+
     redirect_to domains_path
   end
 
@@ -25,7 +43,7 @@ class DomainsController < ApplicationController
 
   private
 
-  def create_params
+  def domain_params
     params.require(:domain).permit(:url)
   end
 end
