@@ -13,10 +13,6 @@ class DomainsController < ApplicationController
     redirect_to domains_path
   end
 
-  def show
-    @domain = Domain.find params[:id]
-  end
-
   def start_indexing
     @domain = Domain.find params[:id]
     @domain.update status: :enqueued,
