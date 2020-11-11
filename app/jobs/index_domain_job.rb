@@ -14,11 +14,11 @@ class IndexDomainJob < ApplicationJob
     end
 
     domain.update status: :indexed
-    ActionCable.server.broadcast 'crawler', id: domain.id, type: 'finished'
   rescue StandardError => e
     # TODO: Better handling of invalid domains
     p e
     domain.update status: :error
+  ensure
     ActionCable.server.broadcast 'crawler', id: domain.id, type: 'finished'
   end
 end
