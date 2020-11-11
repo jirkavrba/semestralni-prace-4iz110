@@ -14,6 +14,7 @@
       <% @not_indexed.each do |domain| %>
         <div class="card">
           <div class="card-content">
+            <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= domain.url %>"><br>
             <code class="black-text"><%= domain.url %></code><br>
             <% case domain.status %>
             <% when 'enqueued' %>
@@ -25,9 +26,9 @@
             <% end %>
           </div>
           <div class="card-action">
-            <%= link_to 'Upravit', edit_domain_path(domain) %>
+            <%= link_to 'Upravit', edit_domain_path(domain), class: 'black-text' %>
             <% unless %w[being_indexed enqueued].include? domain.status %>
-              <%= link_to 'Indexovat', domain_path(domain) + '/index' %>
+              <%= link_to 'Indexovat', domain_path(domain) + '/index', class: 'red-text' %>
             <% end %>
           </div>
         </div>
@@ -39,12 +40,13 @@
       <% @indexed.each do |domain| %>
         <div class="card">
           <div class="card-content">
+            <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= domain.url %>"><br>
             <code class="black-text"><%= domain.url %></code><br>
             <small class="grey-text">Naposledy indexováno <b><%= domain.last_indexed_at.to_s(:long) %></b></small>
           </div>
           <div class="card-action">
-            <%= link_to 'Upravit', edit_domain_path(domain) %>
-            <%= link_to 'Indexovat znovu', domain_path(domain) + '/index' %>
+            <%= link_to 'Upravit', edit_domain_path(domain), class: 'black-text' %>
+            <%= link_to 'Indexovat znovu', domain_path(domain) + '/index', class: 'black-text' %>
           </div>
         </div>
       <% end %>
