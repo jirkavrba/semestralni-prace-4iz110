@@ -17,10 +17,9 @@ class IndexDomainJob < ApplicationJob
     end
 
     domain.update status: :indexed
-  rescue StandardError => e
-    # TODO: Better handling of invalid domains
-    p e
+  rescue StandardError => error
     domain.update status: :error
+    Rails.logger.debug error.full_message
   ensure
     ActionCable.server.broadcast 'crawler', id: domain.id, type: 'finished'
   end

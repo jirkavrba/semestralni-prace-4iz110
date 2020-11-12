@@ -1,7 +1,6 @@
 module Indexing
   class Indexer
     def index_page(url, page, domain)
-      # Ignore
       domain.indexed_pages.create url: url,
                                   title: page.title
     end

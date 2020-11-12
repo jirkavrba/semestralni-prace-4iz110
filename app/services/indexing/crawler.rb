@@ -9,9 +9,11 @@ module Indexing
     end
 
     def run(&block)
+      # Reset the URL cache
       @urls_indexed = {}
       @callback = block
 
+      # Start indexing with the default link depth
       index @root
     end
 
@@ -25,19 +27,19 @@ module Indexing
     rescue Mechanize::UnsupportedSchemeError,
            Mechanize::ResponseCodeError,
            URI::BadURIError,
-           URI::InvalidURIError => e
-      # TODO: Log errors
+           URI::InvalidURIError
       # Ignored
     end
 
     private
 
+    # Process a given url, now it's guaranteed that it hasn't been indexed yet
     def process(url, depth)
       @urls_indexed[url] = true
 
       page = agent.get(url)
 
-      # Do not handle images etc
+      # Do not handle images etc.
       return unless page.instance_of?(Mechanize::Page)
 
       # Do the actual indexing / analytics
