@@ -1,7 +1,9 @@
 module Indexing
   class Indexer
     def index_page(url, page, domain)
+      text = Nokogiri::HTML(page.body).text
       domain.indexed_pages.create url: url,
+                                  body: text,
                                   title: page.title
     end
 

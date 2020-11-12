@@ -3,6 +3,7 @@ class CreateIndexedPages < ActiveRecord::Migration[6.0]
     create_table :indexed_pages do |t|
       t.string :url, uniqueness: true
       t.string :title
+      t.string :body
       t.integer :domain_id
 
       t.timestamps

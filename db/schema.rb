@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2020_11_11_152230) do
   create_table "indexed_pages", force: :cascade do |t|
     t.string "url"
     t.string "title"
+    t.string "body"
     t.integer "domain_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
