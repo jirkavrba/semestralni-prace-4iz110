@@ -5,6 +5,8 @@ class SearchController < ApplicationController
 
   def results
     @query = params[:query]
-    @results = IndexedPage.search params[:query]
+    @results = IndexedPage.search(params[:query])
+                          .page(params[:page])
+                          .per(5)
   end
 end

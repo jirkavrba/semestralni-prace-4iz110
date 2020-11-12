@@ -1,7 +1,15 @@
 <div class="card">
   <div class="card-content">
     <div class="card-title">Výsledky pro <b>&bdquo;<%= @query %>&rdquo;</b></div>
-    <p class="grey-text">Nalezeno <%= @results.count %> výsledků</p>
+    <div class="col s12">
+      <div class="valign-wrapper" style="margin-bottom: 1rem;">
+        <%= link_to_prev_page @results, 'arrow_back', class: 'grey-text material-icons' %>
+        <b style="margin: 0 1.5rem">
+          Strana <%= @results.current_page %>
+        </b>
+        <%= link_to_next_page @results, 'arrow_forward', class: 'grey-text material-icons' %>
+      </div>
+    </div>
 
     <div class="row">
       <% @results.each do |result| %>

@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'mechanize'
 
+# Pagination
+gem 'kaminari'
+
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
