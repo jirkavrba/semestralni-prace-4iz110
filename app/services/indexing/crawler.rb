@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uri'
 
 module Indexing
@@ -23,7 +25,6 @@ module Indexing
 
       # Process the given url, this also adds it to the index
       process url, depth unless invalid
-
     rescue Mechanize::UnsupportedSchemeError,
            Mechanize::ResponseCodeError,
            URI::BadURIError,

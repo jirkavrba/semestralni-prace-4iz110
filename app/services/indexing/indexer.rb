@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Indexing
   class Indexer
     def index_page(url, page, domain)
