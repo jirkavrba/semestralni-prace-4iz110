@@ -20,7 +20,6 @@ class DomainsController < ApplicationController
   def update
     @domain = Domain.find params[:id]
     @domain.update domain_params.merge last_indexed_at: nil, status: :not_indexed
-    @domain.indexed_pages.destroy_all
 
     redirect_to domains_path
   end
