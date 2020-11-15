@@ -7,6 +7,6 @@ class SearchController < ApplicationController
     @query = params[:query]
     @results = IndexedPage.search(params[:query])
                           .page(params[:page])
-                          .per(5)
+                          .per(6)
   end
 end

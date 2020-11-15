@@ -1,66 +1,43 @@
-<div class="card">
-  <div class="card-content">
-    <div class="row">
-      <div class="col s12 m8">
-        <h5>Správa domén</h5>
-        <p class="grey-text">Celkem je v systému <%= @domains.count %> nastavených domén</p>
-      </div>
-      <div class="col s12 m4">
-        <%= link_to "Přidat doménu", new_domain_path, class: 'right btn green' %>
+<div class="row">
+  <div class="col-sm-12 col-md-8">
+    <h4>Správa domén</h4>
+    <p class="grey-text">Celkem je v systému <%= @domains.count %> nastavených domén</p>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <div class="float-right">
+      <%= link_to "Přidat doménu", new_domain_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <hr>
+  </div>
+  <% unless @not_indexed.empty? %>
+    <div class="col-sm-12">
+      <h5>Domény, které ještě nebyly indexované.</h5>
+      <div class="row">
+        <% @not_indexed.each do |domain| %>
+          <%= render partial: "domain", locals: {domain: domain, indexed: false} %>
+        <% end %>
       </div>
     </div>
-    <% unless @not_indexed.empty? %>
-      <h5>Domény, které ještě nebyly indexované.</h5>
-      <% @not_indexed.each do |domain| %>
-        <div class="card">
-          <div class="card-content">
-            <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= domain.url %>"><br>
-            <code class="black-text"><%= domain.url %></code><br>
-            <% case domain.status %>
-            <% when 'enqueued' %>
-              <small class="grey-text">Čeká ve frontě na indexování</small>
-            <% when 'being_indexed' %>
-              <small class="blue-text">Probíhá indexování domény</small>
-            <% when 'error' %>
-              <small class="red-text">Při indexování došlo k chybě!</small>
-            <% end %>
-
-            <br>
-            <small id="domain_<%= domain.id %>"></small>
-          </div>
-          <div class="card-action">
-            <%= link_to 'Upravit', edit_domain_path(domain), class: 'black-text' %>
-            <% unless %w[being_indexed enqueued].include? domain.status %>
-              <%= link_to 'Indexovat', domain_path(domain) + '/index', class: 'red-text' %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-
-    <% unless @indexed.empty? %>
+  <% end %>
+  <% unless @indexed.empty? %>
+    <div class="col-sm-12">
+      <hr>
       <h5>Domény v indexu</h5>
-      <% @indexed.each do |domain| %>
-        <div class="card">
-          <div class="card-content">
-            <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= domain.url %>"><br>
-            <code class="black-text"><%= domain.url %></code><br>
-            <small class="grey-text">Naposledy indexováno <b><%= domain.last_indexed_at.to_s(:long) %></b></small>
-          </div>
-          <div class="card-action">
-            <%= link_to 'Upravit', edit_domain_path(domain), class: 'black-text' %>
-            <%= link_to 'Indexovat znovu', domain_path(domain) + '/index', class: 'black-text' %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <script>
-      $(document).on('turbolinks:load', function () {
-          if (window.location.href === "<%= domains_url %>") {
-              // Load the action cable connection
-              enableDomainStatusUpdatesChannel();
-          }
-      });
-  </script>
+      <div class="row">
+        <% @indexed.each do |domain| %>
+          <%= render partial: "domain", locals: {domain: domain, indexed: true} %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
+<script>
+    $(document).on('turbolinks:load', function () {
+        if (window.location.href === "<%= domains_url %>") {
+            // Load the action cable connection
+            enableDomainStatusUpdatesChannel();
+        }
+    });
+</script>

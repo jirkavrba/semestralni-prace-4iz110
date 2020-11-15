@@ -1,0 +1,15 @@
+<div class="col s12">
+  <div class="valign-wrapper" style="margin-bottom: 1rem;">
+    <% if @results.first_page? %>
+      <i class="fas fa-arrow-left text-muted" style="opacity: 0.3"></i>
+    <% else %>
+      <%= link_to_prev_page @results, '', class: 'fas text-dark fa-arrow-left' %>
+    <% end %>
+    <b style="margin: 0 1.5rem"><%= @results.current_page %> / <%= @results.total_pages %></b>
+    <% if @results.last_page? %>
+      <i class="fas fa-arrow-right text-muted" style="opacity: 0.3"></i>
+    <% else %>
+      <%= link_to_next_page @results, '', class: 'fas text-dark fa-arrow-right' %>
+    <% end %>
+  </div>
+</div>

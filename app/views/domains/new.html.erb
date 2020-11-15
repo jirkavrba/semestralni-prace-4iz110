@@ -1,23 +1,23 @@
-<div class="card">
-  <div class="card-content">
-    <div class="row">
-      <div class="col s12 m8">
-        <h5>
-          <a href="<%= domains_path %>" class="grey-text" style="margin-right: 1rem"><i class="material-icons md">arrow_back</i></a>
-          Přidat novou doménu
-        </h5>
-      </div>
-      <%= form_with url: domains_path, method: :post do %>
-        <div class="col s12">
-          <div class="input-field">
+<div class="row">
+  <div class="col-sm-12 d-flex">
+    <a href="<%= domains_path %>" class="text-muted mr-3">
+      <i class="fas fa-arrow-left" style="font-size: 1.5rem;"></i>
+    </a>
+    <h4>Přidat novou doménu</h4>
+  </div>
+  <div class="col-sm-12">
+    <div class="card mt-4">
+      <div class="card-body">
+        <%= form_with url: domains_path, method: :post do %>
+          <div class="form-group">
             <%= label_tag "URL adresa kořenového adresáře" %>
-            <%= text_field :domain, :url, autofocus: true %>
+            <%= text_field :domain, :url, autofocus: true, class: 'form-control', required: true, url: true %>
           </div>
-        </div>
-        <div class="col s12">
-          <%= submit_tag "Přidat do systému", class: 'btn-large blue-grey' %>
-        </div>
-      <% end %>
+          <div class="col-sm-s12">
+            <%= submit_tag "Přidat do systému", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

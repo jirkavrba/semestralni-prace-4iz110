@@ -1,21 +1,18 @@
 <div class="row">
-  <div class="col s12 m6 offset-m3">
-    <div class="card" style="margin-top: 3rem;">
-      <div class="card-content">
-        <%= form_with url: search_path, remote: true, method: :get do %>
-          <div class="row">
-            <div class="input-field col s12">
-              <%= label_tag :query, 'Hledaný výraz' %>
-              <%= text_field_tag :query, nil, autofocus: true, required: true, minlength: 3 %>
-              <small class="helper-text">Prohledává se <%= @indexed_domains %> domén</small>
-            </div>
-            <div class="col s12">
-              <div class="center">
-                <%= button_tag 'Hledat', name: nil, class: 'btn-large blue-grey aves-effect waves-light' %>
-              </div>
+  <div class="col-sm-12 col-md-8 offset-md-2">
+    <div class="row">
+      <div class="col-sm-12">
+        <%= form_with url: search_path, remote: true, method: :get, class: "d-block form-inline" do %>
+          <div class="input-group">
+            <%= text_field_tag :query, nil, autofocus: true, required: true, minlength: 3, class: "form-control form-control-lg" %>
+            <div class="input-group-append">
+              <%= button_tag name: nil, class: 'btn btn-lg btn-primary' do %>
+                <i class="fas fa-search mr-1"></i> Hledat
+              <% end %>
             </div>
           </div>
         <% end %>
+        <small class="text-muted">Prohledává se <%= @indexed_domains %> domén</small>
       </div>
     </div>
   </div>

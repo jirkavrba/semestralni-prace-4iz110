@@ -1,0 +1,37 @@
+<div class="col-sm-12 col-md-6 mb-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <img src="https://s2.googleusercontent.com/s2/favicons?domain=<%= domain.url %>" class="mr-2">
+        <code class="text-dark"><%= domain.url %></code><br>
+        <% if !indexed && %w[being_indexed enqueued].include?(domain.status) %>
+          <div class="spinner-border text-muted ml-auto" role="status" style="width: 25px; height: 25px;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        <% end %>
+      </div>
+      <% if indexed %>
+        <small class="text-muted">
+          Indexováno <b class="text-dark"><%= domain.indexed_pages.count %></b> stránek.
+        </small>
+      <% else %>
+        <% case domain.status %>
+        <% when 'enqueued', 'being_indexed' %>
+          <small class="text-primary">Probíhá indexování domény</small>
+        <% when 'error' %>
+          <small class="text-danger">Při indexování došlo k chybě!</small>
+        <% end %>
+      <% end %>
+
+      <br>
+      <code class="text-dark"><small id="domain_<%= domain.id %>"></small></code>
+      <hr>
+      <div class="card-action">
+        <%= link_to 'Upravit', edit_domain_path(domain), class: 'btn btn-secondary' %>
+        <% unless %w[being_indexed enqueued].include? domain.status %>
+          <%= link_to 'Indexovat', domain_path(domain) + '/index', class: 'btn btn-dark' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
