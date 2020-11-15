@@ -10,7 +10,7 @@ module Indexing
     end
 
     def remove_domain(domain)
-      IndexedPage.where(domain_id: domain.id).delete_all
+      domain.indexed_pages.destroy_all
     end
   end
 end
