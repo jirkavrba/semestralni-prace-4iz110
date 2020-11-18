@@ -8,8 +8,8 @@ class IndexDomainJob < ApplicationJob
     indexer.remove_domain domain
 
     crawler = Indexing::Crawler.new domain.url
-    crawler.run do |page, url|
-      indexer.index_page(url, page, domain)
+    crawler.run do |page, url, referrer|
+      indexer.index_page url, page, domain, referrer
 
       ActionCable.server.broadcast 'crawler', id: domain.id,
                                               title: url,
