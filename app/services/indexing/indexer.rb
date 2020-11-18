@@ -2,12 +2,11 @@
 
 module Indexing
   class Indexer
-    def index_page(url, page, domain, referrer)
+    def index_page(url, page, domain)
       text = Nokogiri::HTML(page.body).text
       domain.indexed_pages.create url: url,
                                   body: text,
-                                  title: page.title,
-                                  referrer: referrer
+                                  title: page.title
     end
 
     def remove_domain(domain)

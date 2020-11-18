@@ -19,12 +19,12 @@ module Indexing
       index @root
     end
 
-    def index(url, referrer = nil, depth = 0)
+    def index(url, depth = 0)
       url = normalize_url url
       invalid = (depth == @max_depth) || another_domain?(url) || already_indexed?(url)
 
       # Process the given url, this also adds it to the index
-      process url, referrer, depth unless invalid
+      process url, depth unless invalid
     rescue Mechanize::UnsupportedSchemeError,
            Mechanize::ResponseCodeError,
            URI::BadURIError,
@@ -35,7 +35,7 @@ module Indexing
     private
 
     # Process a given url, now it's guaranteed that it hasn't been indexed yet
-    def process(url, referrer, depth)
+    def process(url, depth)
       @urls_indexed[url] = true
 
       page = agent.get(url)
@@ -44,11 +44,11 @@ module Indexing
       return unless page.instance_of?(Mechanize::Page)
 
       # Do the actual indexing / analytics
-      @callback.call(page, url, referrer)
+      @callback.call(page, url)
 
       # Process all the links
       page.links.each do |link|
-        index link.href, url, depth + 1
+        index link.href, depth + 1
       end
     end
 
