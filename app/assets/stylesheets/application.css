@@ -16,4 +16,11 @@
 
 body {
     background: #eceff1;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+}
+
+.app-container {
+    flex-grow: 1;
 }

@@ -25,6 +25,7 @@
       <div class="navbar-nav">
         <%= link_to "Vyhledávání", root_path, class: "nav-link" %>
         <%= link_to "Správa domén", domains_path, class: "nav-link" %>
+        <%= link_to "Zdrojový kód na GitHub", "https://www.github.com/jirkavrba/semestralni-prace-4iz110", class: "nav-link", target: "_blank" %>
       </div>
     </div>
   </div>
@@ -32,5 +33,15 @@
 <div class="container app-container" style="margin-top: 3rem;">
   <%= yield %>
 </div>
+
+<footer>
+  <div class="container">
+    <small class="text-muted">
+      <b>Jiří Vrba</b><br>
+      Semestrální práce k předmětu 4IZ110<br>
+      Fakulta informatiky a statistiky VŠE
+    </small>
+  </div>
+</footer>
 </body>
 </html>
