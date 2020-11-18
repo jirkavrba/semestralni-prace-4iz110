@@ -2,6 +2,11 @@
   <div class="col-sm-12 col-md-8 offset-md-2">
     <div class="row">
       <div class="col-sm-12">
+        <div class="m-5 text-center">
+        <%= image_tag 'logo.png', width: 400 %>
+        </div>
+      </div>
+      <div class="col-sm-12">
         <%= form_with url: search_path, remote: true, method: :get, class: "d-block form-inline" do %>
           <div class="input-group">
             <%= text_field_tag :query, nil, autofocus: true, required: true, minlength: 3, class: "form-control form-control-lg" %>
